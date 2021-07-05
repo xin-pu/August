@@ -5,3 +5,5 @@
 /.vs
 /src/Bight.Neural/obj
 /src/Bight.Neural/bin
+/src/Bight.DataSets/obj
+/src/Bight.DataSets/bin
