@@ -1,6 +1,8 @@
-﻿namespace Bight.Neural.Layer
+﻿
+namespace Bight.Neural.Layer
 {
     public abstract class Layer
     {
+       
     }
 }
