@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31321.278
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bight.Neural", "src\Bight.Neural\Bight.Neural.csproj", "{0FB06714-EE0C-4A73-BF75-0DCDA3D7135E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0FB06714-EE0C-4A73-BF75-0DCDA3D7135E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FB06714-EE0C-4A73-BF75-0DCDA3D7135E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FB06714-EE0C-4A73-BF75-0DCDA3D7135E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FB06714-EE0C-4A73-BF75-0DCDA3D7135E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C877025F-62B1-4A13-A766-821AF5B594F4}
+	EndGlobalSection
+EndGlobal
