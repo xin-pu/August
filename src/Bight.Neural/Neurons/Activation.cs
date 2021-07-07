@@ -1,5 +1,6 @@
 ﻿using System;
 using Bight.Mathematics.Activator;
+using MathNet.Numerics;
 using MvvmCross.ViewModels;
 using Activator = Bight.Mathematics.Activator.Activator;
 
@@ -32,6 +33,7 @@ namespace Bight.Neural.Neurons
         }
 
         public Func<double, double> ActivateFunc { set; get; }
+        public Func<double, double> FirstDerivativeFunc { set; get; }
 
         /// <summary>
         /// Generate Activation
@@ -85,6 +87,8 @@ namespace Bight.Neural.Neurons
                 default:
                     throw new ArgumentOutOfRangeException(nameof(activator), activator, null);
             }
+
+            FirstDerivativeFunc = Differentiate.FirstDerivativeFunc(ActivateFunc);
         }
 
         public double Activate(double u)

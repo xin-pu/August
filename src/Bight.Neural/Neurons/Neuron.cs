@@ -8,6 +8,8 @@ namespace Bight.Neural.Neurons
     public abstract class Neuron<U> : MvxViewModel
         where U : Matrix<double>
     {
+
+
         private uint _id;
         private string _name;
         private Layer _parentLayer;
@@ -15,6 +17,34 @@ namespace Bight.Neural.Neurons
         public U _weight;
         private double _offset;
         private Activation _activation;
+
+
+        protected Neuron(Shape shape, Activation activation)
+        {
+            Shape = shape;
+            Activation = activation;
+        }
+
+        /// <summary>
+        /// Generate Neuron with RELU function as Activation Function
+        /// </summary>
+        /// <param name="shape"></param>
+        protected Neuron(Shape shape)
+            : this(shape, new Activation())
+        {
+
+        }
+
+        /// <summary>
+        /// Generate Neuron with RELU function as Activation Function
+        /// </summary>
+        /// <param name="shape"></param>
+        protected Neuron(ushort height, ushort width)
+            : this(new Shape(height, width))
+        {
+
+        }
+
 
         public uint ID
         {
@@ -58,32 +88,10 @@ namespace Bight.Neural.Neurons
             set => SetProperty(ref _activation, value);
         }
 
-        public Neuron(Shape shape, Activation activation)
-        {
-            Shape = shape;
-            Activation = activation;
-        }
 
-        /// <summary>
-        /// Generate Neuron with RELU function as Activation Function
-        /// </summary>
-        /// <param name="shape"></param>
-        public Neuron(Shape shape)
-            :this(shape,new Activation())
-        {
+        public abstract NeuronOut Activate(Matrix<double> inputMatrix);
 
-        }
-
-        /// <summary>
-        /// Generate Neuron with RELU function as Activation Function
-        /// </summary>
-        /// <param name="shape"></param>
-        public Neuron(ushort height, ushort width)
-            : this(new Shape(height, width))
-        {
-
-        }
-
+        public abstract void UpdateWeihtAndOffset(Matrix<double> weight, double offset);
 
 
     }
