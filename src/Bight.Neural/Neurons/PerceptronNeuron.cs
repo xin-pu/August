@@ -6,8 +6,8 @@ namespace Bight.Neural.Neurons
 {
     public class PerceptronNeuron : Neuron<Matrix<double>>
     {
-        public PerceptronNeuron(Shape shape, Activation activation)
-            : base(shape, activation)
+        public PerceptronNeuron(Shape shape, Activator activator)
+            : base(shape, activator)
         {
         }
 
@@ -24,7 +24,7 @@ namespace Bight.Neural.Neurons
         public override NeuronOut Activate(Matrix<double> inputMatrix)
         {
             var weight = inputMatrix.PointwiseMultiply(Weight).Enumerate().Sum();
-            var activate = Activation.ActivateFunc(weight + OffSet);
+            var activate = Activator.ActivateFunc(weight + OffSet);
             return new NeuronOut(weight, activate);
         }
 

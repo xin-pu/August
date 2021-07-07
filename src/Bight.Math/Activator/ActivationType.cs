@@ -1,6 +1,6 @@
 ﻿namespace Bight.Mathematics.Activator
 {
-    public enum ActivatorType
+    public enum ActivationType
     {
         Logistic,
         Tanh,

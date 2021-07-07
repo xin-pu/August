@@ -1,12 +1,13 @@
 ﻿using Bight.Neural.Core;
 using Bight.Neural.Layers;
+using MathNet.Numerics.Distributions;
 using MathNet.Numerics.LinearAlgebra;
+using MathNet.Numerics.LinearAlgebra.Complex;
 using MvvmCross.ViewModels;
 
 namespace Bight.Neural.Neurons
 {
-    public abstract class Neuron<U> : MvxViewModel
-        where U : Matrix<double>
+    public abstract class Neuron : MvxViewModel>
     {
 
 
@@ -14,15 +15,16 @@ namespace Bight.Neural.Neurons
         private string _name;
         private Layer _parentLayer;
         private Shape _shape;
-        public U _weight;
+        private Matrix<double> _weight;
         private double _offset;
-        private Activation _activation;
+        private Activator _activator;
 
 
-        protected Neuron(Shape shape, Activation activation)
+        protected Neuron(Shape shape, Activator activator)
         {
             Shape = shape;
-            Activation = activation;
+            Activator = activator;
+            var a = DenseMatrix.CreateRandom(shape.Height, shape.Height, new Normal());
         }
 
         /// <summary>
@@ -30,7 +32,7 @@ namespace Bight.Neural.Neurons
         /// </summary>
         /// <param name="shape"></param>
         protected Neuron(Shape shape)
-            : this(shape, new Activation())
+            : this(shape, new Activator())
         {
 
         }
@@ -70,7 +72,7 @@ namespace Bight.Neural.Neurons
             set => SetProperty(ref _shape, value);
         }
 
-        public U Weight
+        public Matrix<double> Weight
         {
             get => _weight;
             set => SetProperty(ref _weight, value);
@@ -82,10 +84,10 @@ namespace Bight.Neural.Neurons
             set => SetProperty(ref _offset, value);
         }
 
-        public Activation Activation
+        public Activator Activator
         {
-            get => _activation;
-            set => SetProperty(ref _activation, value);
+            get => _activator;
+            set => SetProperty(ref _activator, value);
         }
 
 

@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Bight.Mathematics.Activator
 {
-    public class Activator
+    public class Activation
     {
         /// <summary>
         /// 
