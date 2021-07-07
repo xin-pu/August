@@ -1,5 +1,5 @@
 ﻿
-namespace Bight.Neural.Layer
+namespace Bight.Neural.Layers
 {
     public abstract class Layer
     {
