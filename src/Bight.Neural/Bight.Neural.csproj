@@ -10,4 +10,8 @@
     <PackageReference Include="YamlDotNet" Version="11.2.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Bight.Math\Bight.Mathematics.csproj" />
+  </ItemGroup>
+
 </Project>

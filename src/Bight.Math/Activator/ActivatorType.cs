@@ -2,10 +2,16 @@
 {
     public enum ActivatorType
     {
-        SIGMOID,
-        RELU,
-        SWICH,
-        GELU,
-        MAXOUT
+        Logistic,
+        Tanh,
+        HardLogistic,
+        HardTanh,
+        ReLU,
+        LeakyReLu,
+        PReLu,
+        ELU,
+        Softplus,
+        Swish,
+        GELU
     }
 }

@@ -80,7 +80,7 @@ namespace Bight.Mathematics.Activator
         #endregion
 
 
-        #region RELU function
+        #region GELU function
 
         /// <summary>
         /// Gaussian Error Linear Unit
