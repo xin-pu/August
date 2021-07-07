@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bight.Neural", "src\Bight.N
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bight.DataSets", "src\Bight.DataSets\Bight.DataSets.csproj", "{223AB50C-1DEA-4EB7-A002-0F171DAC5430}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bight.Math", "src\Bight.Math\Bight.Math.csproj", "{B42316C8-FE70-47AF-8CC6-3DBA6ACE2F61}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bight.Mathematics", "src\Bight.Math\Bight.Mathematics.csproj", "{B42316C8-FE70-47AF-8CC6-3DBA6ACE2F61}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
