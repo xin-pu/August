@@ -126,14 +126,14 @@ namespace Bight.Neural.Neurons
 
         public object Clone()
         {
-            var serializer = new YAXSerializer(typeof(Neuron));
+            var serializer = new YAXSerializer(GetType());
             var res = serializer.Serialize(this);
             return serializer.Deserialize(res);
         }
 
         public override string ToString()
         {
-            var serializer = new YAXSerializer(typeof(Neuron));
+            var serializer = new YAXSerializer(GetType());
             return serializer.Serialize(this);
         }
     }
