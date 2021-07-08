@@ -1,13 +1,15 @@
 ﻿using Bight.Neural.Core;
 using Bight.Neural.Layers;
 using MathNet.Numerics.Distributions;
-using MathNet.Numerics.LinearAlgebra;
-using MathNet.Numerics.LinearAlgebra.Complex;
+using MathNet.Numerics.LinearAlgebra.Double;
 using MvvmCross.ViewModels;
+using System;
+using YamlDotNet.Serialization;
+using YamlDotNet.Serialization.NamingConventions;
 
 namespace Bight.Neural.Neurons
 {
-    public abstract class Neuron : MvxViewModel>
+    public abstract class Neuron : MvxViewModel, ICloneable
     {
 
 
@@ -15,24 +17,23 @@ namespace Bight.Neural.Neurons
         private string _name;
         private Layer _parentLayer;
         private Shape _shape;
-        private Matrix<double> _weight;
+        private DenseMatrix _weight;
         private double _offset;
         private Activator _activator;
+        private IContinuousDistribution _distribution;
 
-
-        protected Neuron(Shape shape, Activator activator)
+        protected Neuron()
         {
-            Shape = shape;
-            Activator = activator;
-            var a = DenseMatrix.CreateRandom(shape.Height, shape.Height, new Normal());
+            
         }
+
 
         /// <summary>
         /// Generate Neuron with RELU function as Activation Function
         /// </summary>
         /// <param name="shape"></param>
         protected Neuron(Shape shape)
-            : this(shape, new Activator())
+            : this(shape, new Activator(), new Normal())
         {
 
         }
@@ -42,13 +43,28 @@ namespace Bight.Neural.Neurons
         /// </summary>
         /// <param name="shape"></param>
         protected Neuron(ushort height, ushort width)
-            : this(new Shape(height, width))
+            : this(new Shape(height, width), new Activator(), new Normal())
         {
 
         }
 
+        protected Neuron(Shape shape, Activator activator)
+               : this(shape, activator, new Normal())
+        {
 
-        public uint ID
+        }
+
+        protected Neuron(Shape shape, Activator activator,
+            IContinuousDistribution distribution)
+        {
+            Shape = shape;
+            Activator = activator;
+            Distribution = distribution;
+            InitialWeightAndOffset();
+        }
+
+
+        public uint Id
         {
             get => _id;
             set => SetProperty(ref _id, value);
@@ -72,7 +88,7 @@ namespace Bight.Neural.Neurons
             set => SetProperty(ref _shape, value);
         }
 
-        public Matrix<double> Weight
+        public DenseMatrix Weight
         {
             get => _weight;
             set => SetProperty(ref _weight, value);
@@ -90,11 +106,44 @@ namespace Bight.Neural.Neurons
             set => SetProperty(ref _activator, value);
         }
 
+        [YamlIgnore]
+        public IContinuousDistribution Distribution
+        {
+            get => _distribution;
+            set => SetProperty(ref _distribution, value);
+        }
 
-        public abstract NeuronOut Activate(Matrix<double> inputMatrix);
+        private void InitialWeightAndOffset()
+        {
+            Weight = DenseMatrix.CreateRandom(Shape.Height, Shape.Height, Distribution);
+            OffSet = Distribution.Sample();
+        }
 
-        public abstract void UpdateWeihtAndOffset(Matrix<double> weight, double offset);
+
+        public abstract NeuronOut Activate(DenseMatrix inputMatrix);
+        public abstract void UpdateWeihtAndOffset(DenseMatrix weight, double offset);
 
 
+
+        public object Clone()
+        {
+            var serializer = new SerializerBuilder()
+                .WithNamingConvention(CamelCaseNamingConvention.Instance)
+                .Build();
+            var str = serializer.Serialize(this);
+            var deserializer = new DeserializerBuilder()
+                .WithNamingConvention(CamelCaseNamingConvention.Instance)
+                .Build();
+            return deserializer.Deserialize(str, this.GetType());
+        }
+
+        public override string ToString()
+        {
+            var serializer = new SerializerBuilder()
+                .WithNamingConvention(CamelCaseNamingConvention.Instance)
+                .Build();
+            var yaml = serializer.Serialize(this);
+            return yaml;
+        }
     }
 }

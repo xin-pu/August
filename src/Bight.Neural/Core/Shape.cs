@@ -8,6 +8,11 @@ namespace Bight.Neural.Core
         private ushort _width;
         private uint _level;
 
+        public Shape()
+        {
+
+        }
+
         public Shape(ushort height, ushort width)
         {
             Height = height;

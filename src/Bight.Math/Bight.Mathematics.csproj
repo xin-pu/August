@@ -5,7 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MathNet.Numerics" Version="4.15.0" />
+    <ProjectReference Include="..\Numerics\Numerics.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Matrix\" />
   </ItemGroup>
 
 </Project>
