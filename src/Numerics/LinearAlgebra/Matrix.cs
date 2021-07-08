@@ -222,7 +222,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// </summary>
         public void CoerceZero(Func<T, bool> zeroPredicate)
         {
-            MapInplace(x => zeroPredicate(x) ? Zero : x, Zeros.AllowSkip);
+            MapInplace(x => zeroPredicate(x) ? Zero : x);
         }
 
         /// <summary>
@@ -1721,7 +1721,7 @@ namespace MathNet.Numerics.LinearAlgebra
         public TU[] FoldByRow<TU>(Func<TU, T, TU> f, TU state, Zeros zeros = Zeros.AllowSkip)
         {
             var result = new TU[RowCount];
-            if (!EqualityComparer<TU>.Default.Equals(state, default(TU)))
+            if (!EqualityComparer<TU>.Default.Equals(state, default))
             {
                 CommonParallel.For(0, result.Length, 4096, (a, b) =>
                 {
@@ -1742,7 +1742,7 @@ namespace MathNet.Numerics.LinearAlgebra
         public TU[] FoldByColumn<TU>(Func<TU, T, TU> f, TU state, Zeros zeros = Zeros.AllowSkip)
         {
             var result = new TU[ColumnCount];
-            if (!EqualityComparer<TU>.Default.Equals(state, default(TU)))
+            if (!EqualityComparer<TU>.Default.Equals(state, default))
             {
                 CommonParallel.For(0, result.Length, 4096, (a, b) =>
                 {

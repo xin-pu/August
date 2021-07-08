@@ -356,8 +356,7 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
 
         public static DenseColumnMajorMatrixStorage<T> OfColumnMajorEnumerable(int rows, int columns, IEnumerable<T> data)
         {
-            var arrayData = data as T[];
-            if (arrayData != null)
+            if (data is T[] arrayData)
             {
                 return OfColumnMajorArray(rows, columns, arrayData);
             }
@@ -385,16 +384,14 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
                     }
                     else
                     {
-                        using (var rowIterator = columnIterator.Current.GetEnumerator())
+                        using var rowIterator = columnIterator.Current.GetEnumerator();
+                        var end = (column + 1) * rows;
+                        for (int index = column * rows; index < end; index++)
                         {
-                            var end = (column + 1)*rows;
-                            for (int index = column*rows; index < end; index++)
-                            {
-                                if (!rowIterator.MoveNext()) throw new ArgumentOutOfRangeException(nameof(data), string.Format(Resources.ArgumentArrayWrongLength, rows));
-                                array[index] = rowIterator.Current;
-                            }
-                            if (rowIterator.MoveNext()) throw new ArgumentOutOfRangeException(nameof(data), string.Format(Resources.ArgumentArrayWrongLength, rows));
+                            if (!rowIterator.MoveNext()) throw new ArgumentOutOfRangeException(nameof(data), string.Format(Resources.ArgumentArrayWrongLength, rows));
+                            array[index] = rowIterator.Current;
                         }
+                        if (rowIterator.MoveNext()) throw new ArgumentOutOfRangeException(nameof(data), string.Format(Resources.ArgumentArrayWrongLength, rows));
                     }
                 }
                 if (columnIterator.MoveNext()) throw new ArgumentOutOfRangeException(nameof(data), string.Format(Resources.ArgumentArrayWrongLength, columns));
@@ -410,15 +407,13 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
                 for (int row = 0; row < rows; row++)
                 {
                     if (!rowIterator.MoveNext()) throw new ArgumentOutOfRangeException(nameof(data), string.Format(Resources.ArgumentArrayWrongLength, rows));
-                    using (var columnIterator = rowIterator.Current.GetEnumerator())
+                    using var columnIterator = rowIterator.Current.GetEnumerator();
+                    for (int index = row; index < array.Length; index += rows)
                     {
-                        for (int index = row; index < array.Length; index += rows)
-                        {
-                            if (!columnIterator.MoveNext()) throw new ArgumentOutOfRangeException(nameof(data), string.Format(Resources.ArgumentArrayWrongLength, columns));
-                            array[index] = columnIterator.Current;
-                        }
-                        if (columnIterator.MoveNext()) throw new ArgumentOutOfRangeException(nameof(data), string.Format(Resources.ArgumentArrayWrongLength, columns));
+                        if (!columnIterator.MoveNext()) throw new ArgumentOutOfRangeException(nameof(data), string.Format(Resources.ArgumentArrayWrongLength, columns));
+                        array[index] = columnIterator.Current;
                     }
+                    if (columnIterator.MoveNext()) throw new ArgumentOutOfRangeException(nameof(data), string.Format(Resources.ArgumentArrayWrongLength, columns));
                 }
                 if (rowIterator.MoveNext()) throw new ArgumentOutOfRangeException(nameof(data), string.Format(Resources.ArgumentArrayWrongLength, rows));
             }
@@ -738,8 +733,7 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
             {
                 if (predicate(Data[i]))
                 {
-                    int row, column;
-                    RowColumnAtIndex(i, out row, out column);
+                    RowColumnAtIndex(i, out var row, out var column);
                     return new Tuple<int, int, T>(row, column, Data[i]);
                 }
             }

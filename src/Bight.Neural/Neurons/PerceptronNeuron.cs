@@ -40,7 +40,7 @@ namespace Bight.Neural.Neurons
 
         public override void UpdateWeihtAndOffset(DenseMatrix weight, double offset)
         {
-            Weight =(Weight + weight);
+            Weight +=weight;
             OffSet += offset;
         }
     }
