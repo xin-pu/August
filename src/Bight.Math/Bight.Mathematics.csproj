@@ -5,11 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Numerics\Numerics.csproj" />
+    <Folder Include="Matrix\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Matrix\" />
+    <ProjectReference Include="..\Numerics\Numerics.csproj" />
   </ItemGroup>
 
 </Project>

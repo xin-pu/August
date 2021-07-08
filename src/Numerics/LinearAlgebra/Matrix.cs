@@ -50,6 +50,12 @@ namespace MathNet.Numerics.LinearAlgebra
 #endif
         where T : struct, IEquatable<T>, IFormattable
     {
+
+        protected Matrix()
+        {
+
+        }
+
         /// <summary>
         /// Initializes a new instance of the Matrix class.
         /// </summary>
@@ -65,19 +71,19 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <summary>
         /// Gets the raw matrix data storage.
         /// </summary>
-        public MatrixStorage<T> Storage { get; private set; }
+        public MatrixStorage<T> Storage { get; set; }
 
         /// <summary>
         /// Gets the number of columns.
         /// </summary>
         /// <value>The number of columns.</value>
-        public int ColumnCount { get; private set; }
+        public int ColumnCount { get; set; }
 
         /// <summary>
         /// Gets the number of rows.
         /// </summary>
         /// <value>The number of rows.</value>
-        public int RowCount { get; private set; }
+        public int RowCount { get; set; }
 
         /// <summary>
         /// Gets or sets the value at the given row and column, with range checking.

@@ -34,7 +34,7 @@ namespace Bight.Neural.Core
 
         public uint Level
         {
-            get => _height;
+            get => _level;
             protected set => SetProperty(ref _level, value);
         }
     }

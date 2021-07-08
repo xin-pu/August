@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="MvvmCross" Version="8.0.1" />
-    <PackageReference Include="YamlDotNet" Version="11.2.1" />
+    <PackageReference Include="YAXLib" Version="2.15.0" />
   </ItemGroup>
 
   <ItemGroup>

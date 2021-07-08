@@ -44,7 +44,12 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
         // [ruegg] public fields are OK here
 
         [DataMember(Order = 1)]
-        public readonly T[] Data;
+        public T[] Data { set; get; }
+
+        public DenseColumnMajorMatrixStorage()
+        {
+
+        }
 
         internal DenseColumnMajorMatrixStorage(int rows, int columns)
             : base(rows, columns)

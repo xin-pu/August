@@ -66,7 +66,13 @@ namespace MathNet.Numerics.LinearAlgebra.Double
         /// Gets the matrix's data.
         /// </summary>
         /// <value>The matrix's data.</value>
-        readonly double[] _values;
+        double[] _values;
+
+
+        public DenseMatrix()
+        {
+
+        }
 
         /// <summary>
         /// Create a new dense matrix straight from an initialized matrix storage instance.
@@ -395,6 +401,7 @@ namespace MathNet.Numerics.LinearAlgebra.Double
         /// <value>The matrix's data.</value>
         public double[] Values
         {
+            set { _values = value; }
             get { return _values; }
         }
 

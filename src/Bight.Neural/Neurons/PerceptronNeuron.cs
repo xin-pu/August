@@ -1,10 +1,13 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Bight.Neural.Core;
 using MathNet.Numerics.Distributions;
 using MathNet.Numerics.LinearAlgebra.Double;
+using Activator = Bight.Neural.Core.Activator;
 
 namespace Bight.Neural.Neurons
 {
+    [Serializable]
     public class PerceptronNeuron : Neuron
     {
         public PerceptronNeuron()

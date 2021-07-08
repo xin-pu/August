@@ -41,6 +41,11 @@ namespace MathNet.Numerics.LinearAlgebra.Double
     [Serializable]
     public abstract class Matrix : Matrix<double>
     {
+        protected Matrix()
+        {
+
+        }
+
         /// <summary>
         /// Initializes a new instance of the Matrix class.
         /// </summary>

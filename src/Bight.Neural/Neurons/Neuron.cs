@@ -1,15 +1,15 @@
-﻿using Bight.Neural.Core;
+﻿using System.IO;
+using Bight.Neural.Core;
 using Bight.Neural.Layers;
 using MathNet.Numerics.Distributions;
 using MathNet.Numerics.LinearAlgebra.Double;
 using MvvmCross.ViewModels;
-using System;
-using YamlDotNet.Serialization;
-using YamlDotNet.Serialization.NamingConventions;
+using YAXLib;
+
 
 namespace Bight.Neural.Neurons
 {
-    public abstract class Neuron : MvxViewModel, ICloneable
+    public abstract class Neuron : MvxViewModel
     {
 
 
@@ -24,7 +24,7 @@ namespace Bight.Neural.Neurons
 
         protected Neuron()
         {
-            
+
         }
 
 
@@ -49,7 +49,7 @@ namespace Bight.Neural.Neurons
         }
 
         protected Neuron(Shape shape, Activator activator)
-               : this(shape, activator, new Normal())
+            : this(shape, activator, new Normal())
         {
 
         }
@@ -106,7 +106,6 @@ namespace Bight.Neural.Neurons
             set => SetProperty(ref _activator, value);
         }
 
-        [YamlIgnore]
         public IContinuousDistribution Distribution
         {
             get => _distribution;
@@ -127,23 +126,16 @@ namespace Bight.Neural.Neurons
 
         public object Clone()
         {
-            var serializer = new SerializerBuilder()
-                .WithNamingConvention(CamelCaseNamingConvention.Instance)
-                .Build();
-            var str = serializer.Serialize(this);
-            var deserializer = new DeserializerBuilder()
-                .WithNamingConvention(CamelCaseNamingConvention.Instance)
-                .Build();
-            return deserializer.Deserialize(str, this.GetType());
+            var serializer = new YAXSerializer(typeof(Neuron));
+            var res = serializer.Serialize(this);
+            return serializer.Deserialize(res);
         }
 
         public override string ToString()
         {
-            var serializer = new SerializerBuilder()
-                .WithNamingConvention(CamelCaseNamingConvention.Instance)
-                .Build();
-            var yaml = serializer.Serialize(this);
-            return yaml;
+            var serializer = new YAXSerializer(typeof(Neuron));
+            return serializer.Serialize(this);
         }
     }
+
 }

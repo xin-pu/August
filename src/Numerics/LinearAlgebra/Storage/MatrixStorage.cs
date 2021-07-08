@@ -43,11 +43,16 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
 
         protected static readonly T Zero = BuilderInstance<T>.Matrix.Zero;
 
-        [DataMember(Order = 1)]
-        public readonly int RowCount;
+        [DataMember(Order = 1)] 
+        public int RowCount { set; get; }
 
-        [DataMember(Order = 2)]
-        public readonly int ColumnCount;
+        [DataMember(Order = 2)] 
+        public int ColumnCount { set; get; }
+
+        protected MatrixStorage()
+        {
+
+        }
 
         protected MatrixStorage(int rowCount, int columnCount)
         {
