@@ -2,6 +2,7 @@
 using Bight.Mathematics.Activator;
 using MathNet.Numerics;
 using MvvmCross.ViewModels;
+using YamlDotNet.Serialization;
 
 namespace Bight.Neural.Core
 {
@@ -31,9 +32,10 @@ namespace Bight.Neural.Core
             set => SetProperty(ref β, value);
         }
 
-  
+        [YamlIgnore]
         public Func<double, double> ActivateFunc { set; get; }
 
+        [YamlIgnore]
         public Func<double, double> FirstDerivativeFunc { set; get; }
 
         /// <summary>

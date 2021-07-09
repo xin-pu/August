@@ -50,12 +50,18 @@ namespace MathNet.Numerics.LinearAlgebra.Double
         /// <summary>
         /// Number of elements
         /// </summary>
-        readonly int _length;
+        public int _length;
 
         /// <summary>
         /// Gets the vector's data.
         /// </summary>
-        readonly double[] _values;
+        public double[] _values;
+
+
+        public DenseVector()
+        {
+
+        }
 
         /// <summary>
         /// Create a new dense vector straight from an initialized vector storage instance.

@@ -7,9 +7,8 @@ namespace Bight.Neural.Layers
     public class Flatten : Layer
     {
 
-    
 
-        public override Matrix Call(Matrix input)
+        public override DenseMatrix Call(DenseMatrix input)
         {
             InputShape = Shape.From(input);
             var level = InputShape.Levels;

@@ -14,20 +14,23 @@ namespace Bight.Neural.Neurons
         {
         }
 
-        public PerceptronNeuron(Shape shape) : base(shape)
+        public PerceptronNeuron(Shape shape) 
+            : base(shape)
         {
         }
 
-        public PerceptronNeuron(ushort height, ushort width) : base(height, width)
+        public PerceptronNeuron(ushort height, ushort width) 
+            : base(height, width)
         {
         }
 
-        public PerceptronNeuron(Shape shape, Activator activator) : base(shape, activator)
+        public PerceptronNeuron(Shape shape, Activator activator) 
+            : base(shape, activator)
         {
         }
 
-        public PerceptronNeuron(Shape shape, Activator activator, IContinuousDistribution distribution) : base(shape,
-            activator, distribution)
+        public PerceptronNeuron(Shape shape, Activator activator, IContinuousDistribution distribution) 
+            : base(shape, activator, distribution)
         {
         }
 

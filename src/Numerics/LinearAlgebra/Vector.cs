@@ -49,6 +49,12 @@ namespace MathNet.Numerics.LinearAlgebra
 #endif
         where T : struct, IEquatable<T>, IFormattable
     {
+
+        protected Vector()
+        {
+
+        }
+
         /// <summary>
         /// Initializes a new instance of the Vector class.
         /// </summary>

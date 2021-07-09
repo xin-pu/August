@@ -11,6 +11,7 @@ namespace Bight.UnitTest.LayerTest
     public class LayerTest
     {
         private readonly Flatten flatten = new Flatten();
+        private readonly Dense dense = new Dense(10);
         private readonly Normal random = new Normal();
 
         private void Print(object obj)
@@ -38,10 +39,27 @@ namespace Bight.UnitTest.LayerTest
         }
 
 
+
         [Test]
-        public void CloneLayer()
+        public void TransferTest()
+        {
+            var outMatrix = flatten.Call(DenseMatrix.CreateRandom(3, 3, random));
+            outMatrix = flatten.Call(outMatrix);
+            outMatrix = dense.Call(outMatrix);
+            Print(outMatrix);
+        }
+
+        [Test]
+        public void CloneFlatten()
         {
             var clone = flatten.Clone();
+            Print(clone);
+        }
+
+        [Test]
+        public void CloneDense()
+        {
+            var clone = dense.Clone();
             Print(clone);
         }
 

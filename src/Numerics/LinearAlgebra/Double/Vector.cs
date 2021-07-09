@@ -39,6 +39,12 @@ namespace MathNet.Numerics.LinearAlgebra.Double
     [Serializable]
     public abstract class Vector : Vector<double>
     {
+
+        public Vector()
+        {
+
+        }
+
         /// <summary>
         /// Initializes a new instance of the Vector class.
         /// </summary>
