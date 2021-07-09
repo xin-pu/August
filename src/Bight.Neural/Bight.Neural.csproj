@@ -2,7 +2,15 @@
 
   <PropertyGroup>
     <TargetFrameworks>netcoreapp3.1;net4.8</TargetFrameworks>
+    <LangVersion>8</LangVersion>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Layers\Layer\Dense.cs" />
+    <Compile Remove="Layers\Layer\Dropput.cs" />
+    <Compile Remove="Layers\Layer\Masking.cs" />
+    <Compile Remove="Layers\Layer\MaxPool.cs" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.DotNet.PlatformAbstractions" Version="1.1.0" />

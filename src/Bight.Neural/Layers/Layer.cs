@@ -1,4 +1,7 @@
 ﻿
+using System.Collections.Generic;
+using Bight.Neural.Core;
+using MathNet.Numerics.LinearAlgebra.Double;
 using MvvmCross.ViewModels;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
@@ -9,6 +12,17 @@ namespace Bight.Neural.Layers
     public abstract class Layer : MvxViewModel
     {
         public uint ID { set; get; }
+
+        public bool Trainable { set; get; }
+
+        public Shape Shape { set; get; }
+
+
+
+        public abstract Matrix Call(Matrix denseMatrix);
+
+        public abstract Dictionary<string, object> GetConfigs();
+
 
 
 

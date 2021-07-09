@@ -1,6 +1,6 @@
 ﻿namespace Bight.Neural.Layers
 {
-    public class PoolLayer : Layer
+    public class MaxPool : Layer
     {
     }
 }
