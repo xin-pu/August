@@ -7,9 +7,7 @@ namespace Bight.Neural.Layers
     public class Flatten : Layer
     {
 
-        public Shape InputShape { set; get; }
-
-        public Shape OutputShape { set; get; }
+    
 
         public override Matrix Call(Matrix input)
         {

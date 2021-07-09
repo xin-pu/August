@@ -15,8 +15,10 @@ namespace Bight.Neural.Layers
 
         public bool Trainable { set; get; }
 
-        public Shape Shape { set; get; }
 
+        public Shape InputShape { set; get; }
+
+        public Shape OutputShape { set; get; }
 
 
         public abstract Matrix Call(Matrix denseMatrix);

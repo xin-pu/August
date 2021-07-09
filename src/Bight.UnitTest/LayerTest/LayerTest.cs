@@ -38,5 +38,12 @@ namespace Bight.UnitTest.LayerTest
         }
 
 
+        [Test]
+        public void CloneLayer()
+        {
+            var clone = flatten.Clone();
+            Print(clone);
+        }
+
     }
 }

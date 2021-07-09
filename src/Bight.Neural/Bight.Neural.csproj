@@ -6,7 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Layers\Layer\Dense.cs" />
     <Compile Remove="Layers\Layer\Dropput.cs" />
     <Compile Remove="Layers\Layer\Masking.cs" />
     <Compile Remove="Layers\Layer\MaxPool.cs" />
