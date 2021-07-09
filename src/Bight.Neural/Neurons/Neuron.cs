@@ -4,6 +4,8 @@ using Bight.Neural.Layers;
 using MathNet.Numerics.Distributions;
 using MathNet.Numerics.LinearAlgebra.Double;
 using MvvmCross.ViewModels;
+using YamlDotNet.Serialization;
+using YamlDotNet.Serialization.NamingConventions;
 using YAXLib;
 
 
@@ -133,9 +135,15 @@ namespace Bight.Neural.Neurons
 
         public override string ToString()
         {
-            var serializer = new YAXSerializer(GetType());
-            return serializer.Serialize(this);
+
+            var serializer = new SerializerBuilder()
+                .WithNamingConvention(CamelCaseNamingConvention.Instance)
+                .Build();
+            var yaml = serializer.Serialize(this);
+            return yaml;
         }
+
+
     }
 
 }

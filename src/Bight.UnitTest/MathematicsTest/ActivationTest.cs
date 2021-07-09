@@ -1,4 +1,5 @@
 using Bight.Mathematics.Activator;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Bight.UnitTest.MathematicsTest
@@ -16,9 +17,9 @@ namespace Bight.UnitTest.MathematicsTest
             var res0 = Activation.Logistic(0);
             var res1 = Activation.ReLU(0);
             var res2 = Activation.Tanh(0);
-            Assert.AreEqual(0.5, res0, 1E-4);
-            Assert.AreEqual(0, res1, 1E-4);
-            Assert.AreEqual(0, res2, 1E-4);
+            res0.Should().BeInRange(0.4, 0.6);
+            res1.Should().BeInRange(-0.1, 0.1);
+            res2.Should().BeInRange(-0.1, 0.1);
         }
     }
 }
