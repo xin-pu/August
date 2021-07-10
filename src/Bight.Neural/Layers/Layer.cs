@@ -42,7 +42,7 @@ namespace Bight.Neural.Layers
 
         }
 
-        public abstract Matrix<double> Call(Matrix<double> denseMatrix);
+        public abstract Matrix<double> Call(Matrix<double> intPut);
 
         public abstract Dictionary<string, object> GetConfigs();
 

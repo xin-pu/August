@@ -1,6 +1,4 @@
-﻿using System.IO;
-using Bight.Neural.Core;
-using Bight.Neural.Layers;
+﻿using Bight.Neural.Core;
 using MathNet.Numerics.Distributions;
 using MathNet.Numerics.LinearAlgebra.Double;
 using MvvmCross.ViewModels;

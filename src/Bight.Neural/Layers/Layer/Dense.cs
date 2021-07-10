@@ -1,10 +1,9 @@
 ﻿using Bight.Mathematics.Activator;
 using Bight.Neural.Core;
 using MathNet.Numerics.Distributions;
-using MathNet.Numerics.LinearAlgebra.Double;
+using MathNet.Numerics.LinearAlgebra;
 using System;
 using System.Collections.Generic;
-using MathNet.Numerics.LinearAlgebra;
 using Activator = Bight.Neural.Core.Activator;
 
 namespace Bight.Neural.Layers
@@ -15,14 +14,17 @@ namespace Bight.Neural.Layers
     /// `Dense` implements the operation:
     /// `output = activation(dot(input, kernel) + bias)`
     /// where `activation` is the element-wise activation function passed as the `activation` argument,
-    /// `kernel` is a weights matrix created by the layer,
-    /// `bias` is a bias vector created by the layer
+    /// Kenerl is a weights matrix created by the layer,
+    /// Bias is a bias vector created by the layer
     /// (only applicable if `use_bias` is `True`).
     /// </summary>
     public class Dense : Layer
     {
         private int _uints = default;
         private Activator _activator = default;
+        private Matrix<double> _kenerl = default;
+        private Matrix<double> _bias = default;
+
 
         public int Uints
         {
@@ -36,10 +38,22 @@ namespace Bight.Neural.Layers
             set => SetProperty(ref _activator, value);
         }
 
+        /// <summary>
+        /// Height should be Unit
+        /// Width should be 
+        /// </summary>
+        public Matrix<double> Kenerl
+        {
+            get => _kenerl;
+            set => SetProperty(ref _kenerl, value);
+        }
 
-        public Matrix<double> Kenerl { set; get; }
+        public Matrix<double> Bias
+        {
+            get => _bias;
+            set => SetProperty(ref _bias, value);
+        }
 
-        public Vector<double> Bias { set; get; }
 
         /// <summary>
         /// works for clone
@@ -61,22 +75,22 @@ namespace Bight.Neural.Layers
             Activator = new Activator(activationType);
         }
 
-        public override Matrix<double> Call(Matrix<double> denseMatrix)
+        public override Matrix<double> Call(Matrix<double> intPut)
         {
-            InputShape = Shape.From(denseMatrix);
+            InputShape = Shape.From(intPut);
             if (InputShape.Width != 1)
                 throw new Exception();
 
             if (Kenerl == null)
             {
                 Kenerl = CreateMatrix.Random<double>(InputShape.Height, Uints, new Normal());
-                //Bias = CreateVector.Random<double>(Uints, new Normal());
+                Bias = CreateMatrix.Random<double>(Uints, 1, new Normal());
             }
 
-            var outRes = denseMatrix.TransposeThisAndMultiply(Kenerl);
-            var res = outRes;
-            return CreateMatrix.Dense(outRes.RowCount, outRes.ColumnCount,
-                (i, j) => Activator.ActivateFunc(res[i, j])).Transpose();
+            var mul = intPut.Transpose().Multiply(Kenerl);                 /// dot(input, kernel)
+            var outRes = mul.Transpose().Add(Bias);                             /// +bias
+            return CreateMatrix.Dense(outRes.RowCount, outRes.ColumnCount,      /// activate
+                (i, j) => Activator.ActivateFunc(outRes[i, j])).Transpose();
         }
 
         public override Dictionary<string, object> GetConfigs()

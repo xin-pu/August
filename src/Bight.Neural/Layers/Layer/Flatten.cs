@@ -9,12 +9,12 @@ namespace Bight.Neural.Layers
     {
 
 
-        public override Matrix<double> Call(Matrix<double> input)
+        public override Matrix<double> Call(Matrix<double> intPut)
         {
-            InputShape = Shape.From(input);
+            InputShape = Shape.From(intPut);
             var level = InputShape.Levels;
             OutputShape = new Shape(level);
-            var rowMajorvalues = input.Enumerate().ToArray();
+            var rowMajorvalues = intPut.Enumerate().ToArray();
 
             return CreateMatrix.Dense(OutputShape.Height, OutputShape.Width, rowMajorvalues);
         }
