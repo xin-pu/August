@@ -39,8 +39,7 @@ namespace MathNet.Numerics.LinearAlgebra.Double
     [Serializable]
     public abstract class Vector : Vector<double>
     {
-
-        public Vector()
+        protected Vector()
         {
 
         }

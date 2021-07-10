@@ -1,36 +1,39 @@
 using Bight.Neural.Core;
 using Bight.Neural.Neurons;
-using NUnit.Framework;
-using System;
+using FluentAssertions;
 using MathNet.Numerics.LinearAlgebra.Double;
+using Xunit;
+using Xunit.Abstractions;
 
 namespace Bight.UnitTest.NeuralTest
 {
     public class NeuralTest
     {
-        public Neuron Neuron { set; get; }
+        private readonly ITestOutputHelper _testOutputHelper;
 
-        [SetUp]
-        public void Setup()
+        public NeuralTest(ITestOutputHelper testOutputHelper)
         {
-            Neuron = new PerceptronNeuron(new Shape(3, 4));
+            _testOutputHelper = testOutputHelper;
         }
 
-        [Test]
+        public Neuron Neuron { set; get; } = new PerceptronNeuron(new Shape(3, 4));
+
+
+
+        [Fact]
         public void TestPrintNeuron()
         {
-            Console.WriteLine(Neuron);
+            _testOutputHelper.WriteLine(Neuron.ToString());
         }
 
-        [Test]
+        [Fact]
         public void TestClone()
         {
             var clone = Neuron.Clone();
-            Assert.AreNotEqual(Neuron, clone);
-            Console.WriteLine(clone);
+            clone.Should().NotBe(Neuron, "It is clone");
         }
 
-        [Test]
+        [Fact]
         public void TestMul()
         {
             var neu1 = new PerceptronNeuron(3, 3);
@@ -44,11 +47,11 @@ namespace Bight.UnitTest.NeuralTest
             var clone2 = neu2.Clone() as PerceptronNeuron;
 
             neu1.Weight = Matrix.op_DotMultiply(neu1.Weight, neu2.Weight) as DenseMatrix;
-            Console.WriteLine(neu1);
+            _testOutputHelper.WriteLine(neu1.ToString());
 
 
-            clone1.Weight= Matrix.op_DotMultiply(clone1.Weight, clone2.Weight) as DenseMatrix;
-            Console.WriteLine(clone1);
+            clone1.Weight = Matrix.op_DotMultiply(clone1.Weight, clone2.Weight) as DenseMatrix;
+            _testOutputHelper.WriteLine(clone1.ToString());
         }
     }
 }

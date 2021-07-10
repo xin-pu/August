@@ -1,17 +1,14 @@
 using Bight.Mathematics.Activator;
 using FluentAssertions;
-using NUnit.Framework;
+using Xunit;
 
 namespace Bight.UnitTest.MathematicsTest
 {
     public class ActivatorTest
     {
-        [SetUp]
-        public void Setup()
-        {
-        }
+     
 
-        [Test]
+        [Fact]
         public void TestActivator()
         {
             var res0 = Activation.Logistic(0);

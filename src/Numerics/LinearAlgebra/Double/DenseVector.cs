@@ -50,12 +50,12 @@ namespace MathNet.Numerics.LinearAlgebra.Double
         /// <summary>
         /// Number of elements
         /// </summary>
-        public int _length;
+        private int _length;
 
         /// <summary>
         /// Gets the vector's data.
         /// </summary>
-        public double[] _values;
+        private double[] _values;
 
 
         public DenseVector()
@@ -73,7 +73,7 @@ namespace MathNet.Numerics.LinearAlgebra.Double
             : base(storage)
         {
             _length = storage.Length;
-            _values = storage.Data;
+            Values = storage.Data;
         }
 
         /// <summary>
@@ -170,6 +170,7 @@ namespace MathNet.Numerics.LinearAlgebra.Double
         /// <value>The vector's data.</value>
         public double[] Values
         {
+            set { _values = value; }
             get { return _values; }
         }
 

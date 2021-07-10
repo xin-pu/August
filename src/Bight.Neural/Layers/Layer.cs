@@ -41,6 +41,7 @@ namespace Bight.Neural.Layers
     }
 
 
+
     public abstract DenseMatrix Call(DenseMatrix denseMatrix);
 
     public abstract Dictionary<string, object> GetConfigs();

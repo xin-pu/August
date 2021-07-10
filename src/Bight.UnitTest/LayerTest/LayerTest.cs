@@ -4,7 +4,7 @@ using Bight.Neural.Layers;
 using FluentAssertions;
 using MathNet.Numerics.Distributions;
 using MathNet.Numerics.LinearAlgebra.Double;
-using NUnit.Framework;
+using Xunit;
 
 namespace Bight.UnitTest.LayerTest
 {
@@ -20,13 +20,9 @@ namespace Bight.UnitTest.LayerTest
         }
 
 
-        [SetUp]
-        public void Setup()
-        {
+        
 
-        }
-
-        [Test]
+        [Fact]
         public void PrintLayerTest()
         {
 
@@ -40,7 +36,7 @@ namespace Bight.UnitTest.LayerTest
 
 
 
-        [Test]
+        [Fact]
         public void TransferTest()
         {
             var outMatrix = flatten.Call(DenseMatrix.CreateRandom(3, 3, random));
@@ -49,14 +45,14 @@ namespace Bight.UnitTest.LayerTest
             Print(outMatrix);
         }
 
-        [Test]
+        [Fact]
         public void CloneFlatten()
         {
             var clone = flatten.Clone();
             Print(clone);
         }
 
-        [Test]
+        [Fact]
         public void CloneDense()
         {
             var clone = dense.Clone();

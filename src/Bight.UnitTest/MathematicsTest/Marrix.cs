@@ -1,22 +1,30 @@
 ﻿using System;
 using MathNet.Numerics.LinearAlgebra.Double;
-using NUnit.Framework;
+using Xunit;
+using Xunit.Abstractions;
 
 namespace Bight.UnitTest.MathematicsTest
 {
-    [TestFixture]
+
     public class Marrix
     {
-        [SetUp]
+        private readonly ITestOutputHelper _testOutputHelper;
+
+        public Marrix(ITestOutputHelper testOutputHelper)
+        {
+            _testOutputHelper = testOutputHelper;
+        }
+
+        [Fact]
         public void Setup()
         {
         }
 
-        [Test]
+        [Fact]
         public void TestPrintMatrix()
         {
             var mat = DenseMatrix.Build.DenseDiagonal(3, 3, 1);
-            Console.WriteLine(mat);
+            _testOutputHelper.WriteLine(mat.ToString());
         }
     }
 }
