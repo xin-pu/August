@@ -1,9 +1,10 @@
-﻿using System;
-using MathNet.Numerics.LinearAlgebra.Double;
-using System.Collections.Generic;
-using Bight.Mathematics.Activator;
+﻿using Bight.Mathematics.Activator;
 using Bight.Neural.Core;
 using MathNet.Numerics.Distributions;
+using MathNet.Numerics.LinearAlgebra.Double;
+using System;
+using System.Collections.Generic;
+using MathNet.Numerics.LinearAlgebra;
 using Activator = Bight.Neural.Core.Activator;
 
 namespace Bight.Neural.Layers
@@ -36,9 +37,9 @@ namespace Bight.Neural.Layers
         }
 
 
-        public DenseMatrix Kenerl { set; get; }
+        public Matrix<double> Kenerl { set; get; }
 
-        public DenseVector Bias { set; get; }
+        public Vector<double> Bias { set; get; }
 
         /// <summary>
         /// works for clone
@@ -60,23 +61,22 @@ namespace Bight.Neural.Layers
             Activator = new Activator(activationType);
         }
 
-        public override DenseMatrix Call(DenseMatrix denseMatrix)
+        public override Matrix<double> Call(Matrix<double> denseMatrix)
         {
             InputShape = Shape.From(denseMatrix);
             if (InputShape.Width != 1)
                 throw new Exception();
 
-            if (Kenerl == null || Bias == null)
+            if (Kenerl == null)
             {
-                Kenerl = DenseMatrix.CreateRandom(InputShape.Height, Uints, new Normal());
-                Bias = DenseVector.CreateRandom(Uints, new Normal());
+                Kenerl = CreateMatrix.Random<double>(InputShape.Height, Uints, new Normal());
+                //Bias = CreateVector.Random<double>(Uints, new Normal());
             }
 
             var outRes = denseMatrix.TransposeThisAndMultiply(Kenerl);
             var res = outRes;
-            outRes = DenseMatrix.Create(outRes.RowCount, outRes.ColumnCount,
+            return CreateMatrix.Dense(outRes.RowCount, outRes.ColumnCount,
                 (i, j) => Activator.ActivateFunc(res[i, j])).Transpose();
-            return outRes as DenseMatrix;
         }
 
         public override Dictionary<string, object> GetConfigs()

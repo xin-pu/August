@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Bight.Neural.Core;
-using MathNet.Numerics.LinearAlgebra.Double;
+using MathNet.Numerics.LinearAlgebra;
 
 namespace Bight.Neural.Layers
 {
@@ -8,14 +9,17 @@ namespace Bight.Neural.Layers
     {
 
 
-        public override DenseMatrix Call(DenseMatrix input)
+        public override Matrix<double> Call(Matrix<double> input)
         {
             InputShape = Shape.From(input);
             var level = InputShape.Levels;
             OutputShape = new Shape(level);
-            var rowMajorvalues = input.Enumerate();
-            return DenseMatrix.OfColumnMajor(OutputShape.Height, OutputShape.Width, rowMajorvalues);
+            var rowMajorvalues = input.Enumerate().ToArray();
+
+            return CreateMatrix.Dense(OutputShape.Height, OutputShape.Width, rowMajorvalues);
         }
+
+
 
         public override Dictionary<string, object> GetConfigs()
         {

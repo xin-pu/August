@@ -43,8 +43,15 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
 
         protected static readonly T Zero = BuilderInstance<T>.Vector.Zero;
 
-        [DataMember(Order = 1)]
-        public readonly int Length;
+        [DataMember(Order = 1)] public int Length { set; get; }
+
+        [DataMember(Order = 1)] public T[] Data { set; get; }
+
+        [Obsolete("Call for Serializer", true)]
+        protected VectorStorage()
+        {
+
+        }
 
         protected VectorStorage(int length)
         {

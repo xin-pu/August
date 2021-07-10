@@ -1,5 +1,5 @@
 ﻿using System;
-using MathNet.Numerics.LinearAlgebra.Double;
+using MathNet.Numerics.LinearAlgebra;
 using MvvmCross.ViewModels;
 
 namespace Bight.Neural.Core
@@ -93,7 +93,8 @@ namespace Bight.Neural.Core
             Thickness = thickness;
         }
 
-        public static Shape From(Matrix denseMatrix)
+        public static Shape From<T>(Matrix<T> denseMatrix) 
+            where T : struct, IEquatable<T>, IFormattable
         {
             return new Shape(denseMatrix.RowCount, denseMatrix.ColumnCount);
         }

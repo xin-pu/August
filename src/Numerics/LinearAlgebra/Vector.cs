@@ -50,6 +50,7 @@ namespace MathNet.Numerics.LinearAlgebra
         where T : struct, IEquatable<T>, IFormattable
     {
 
+        [Obsolete("Call for Serializer", true)]
         protected Vector()
         {
 
@@ -69,12 +70,12 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <summary>
         /// Gets the raw vector data storage.
         /// </summary>
-        public VectorStorage<T> Storage { get; private set; }
+        public VectorStorage<T> Storage { get; set; }
 
         /// <summary>
         /// Gets the length or number of dimensions of this vector.
         /// </summary>
-        public int Count { get; private set; }
+        public int Count { get; set; }
 
         /// <summary>Gets or sets the value at the given <paramref name="index"/>.</summary>
         /// <param name="index">The index of the value to get or set.</param>

@@ -17,7 +17,6 @@ namespace Bight.Neural.Neurons
 
         private uint _id;
         private string _name;
-        private Layer _parentLayer;
         private Shape _shape;
         private DenseMatrix _weight;
         private double _offset;
@@ -76,12 +75,6 @@ namespace Bight.Neural.Neurons
         {
             get => _name;
             set => SetProperty(ref _name, value);
-        }
-
-        public Layer ParentLayer
-        {
-            get => _parentLayer;
-            set => SetProperty(ref _parentLayer, value);
         }
 
         public Shape Shape

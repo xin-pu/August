@@ -43,16 +43,20 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
     {
         // [ruegg] public fields are OK here
 
-        [DataMember(Order = 1)]
-        public readonly T[] Data;
 
-        internal DenseVectorStorage(int length)
+        [Obsolete("Call for Serializer", true)]
+        public DenseVectorStorage()
+        {
+
+        }
+
+        public DenseVectorStorage(int length)
             : base(length)
         {
             Data = new T[length];
         }
 
-        internal DenseVectorStorage(int length, T[] data)
+        public DenseVectorStorage(int length, T[] data)
             : base(length)
         {
             if (data == null)

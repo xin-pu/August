@@ -47,17 +47,14 @@ namespace MathNet.Numerics.LinearAlgebra.Double
     [DebuggerDisplay("DenseVector {" + nameof(Count) + "}-Double")]
     public class DenseVector : Vector
     {
-        /// <summary>
-        /// Number of elements
-        /// </summary>
-        private int _length;
+
 
         /// <summary>
         /// Gets the vector's data.
         /// </summary>
         private double[] _values;
 
-
+        [Obsolete("Call for Serializer", true)]
         public DenseVector()
         {
 
@@ -72,7 +69,7 @@ namespace MathNet.Numerics.LinearAlgebra.Double
         public DenseVector(DenseVectorStorage<double> storage)
             : base(storage)
         {
-            _length = storage.Length;
+            Count = storage.Length;
             Values = storage.Data;
         }
 
@@ -490,7 +487,7 @@ namespace MathNet.Numerics.LinearAlgebra.Double
             }
             else
             {
-                CommonParallel.For(0, _length, 4096, (a, b) =>
+                CommonParallel.For(0, Count, 4096, (a, b) =>
                 {
                     for (int i = a; i < b; i++)
                     {
@@ -515,7 +512,7 @@ namespace MathNet.Numerics.LinearAlgebra.Double
             }
             else
             {
-                CommonParallel.For(0, _length, 4096, (a, b) =>
+                CommonParallel.For(0, Count, 4096, (a, b) =>
                 {
                     for (int i = a; i < b; i++)
                     {
@@ -550,7 +547,7 @@ namespace MathNet.Numerics.LinearAlgebra.Double
         {
             var index = 0;
             var min = Math.Abs(_values[index]);
-            for (var i = 1; i < _length; i++)
+            for (var i = 1; i < Count; i++)
             {
                 var test = Math.Abs(_values[i]);
                 if (test < min)
@@ -571,7 +568,7 @@ namespace MathNet.Numerics.LinearAlgebra.Double
         {
             var index = 0;
             var max = Math.Abs(_values[index]);
-            for (var i = 1; i < _length; i++)
+            for (var i = 1; i < Count; i++)
             {
                 var test = Math.Abs(_values[i]);
                 if (test > max)
@@ -592,7 +589,7 @@ namespace MathNet.Numerics.LinearAlgebra.Double
         {
             var index = 0;
             var max = _values[0];
-            for (var i = 1; i < _length; i++)
+            for (var i = 1; i < Count; i++)
             {
                 if (max < _values[i])
                 {
@@ -612,7 +609,7 @@ namespace MathNet.Numerics.LinearAlgebra.Double
         {
             var index = 0;
             var min = _values[0];
-            for (var i = 1; i < _length; i++)
+            for (var i = 1; i < Count; i++)
             {
                 if (min > _values[i])
                 {
@@ -631,7 +628,7 @@ namespace MathNet.Numerics.LinearAlgebra.Double
         public override double Sum()
         {
             var sum = 0.0;
-            for (var index = 0; index < _length; index++)
+            for (var index = 0; index < Count; index++)
             {
                 sum += _values[index];
             }
@@ -645,7 +642,7 @@ namespace MathNet.Numerics.LinearAlgebra.Double
         public override double L1Norm()
         {
             var sum = 0d;
-            for (var index = 0; index < _length; index++)
+            for (var index = 0; index < Count; index++)
             {
                 sum += Math.Abs(_values[index]);
             }
@@ -685,7 +682,7 @@ namespace MathNet.Numerics.LinearAlgebra.Double
             if (double.IsPositiveInfinity(p)) return InfinityNorm();
 
             var sum = 0d;
-            for (var index = 0; index < _length; index++)
+            for (var index = 0; index < Count; index++)
             {
                 sum += Math.Pow(Math.Abs(_values[index]), p);
             }
