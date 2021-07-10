@@ -26,7 +26,7 @@ namespace Bight.UnitTest.MathematicsTest
         [Fact]
         public void TestPrintMatrix()
         {
-            var mat = CreateMatrix.Diagonal(3, 3, 1);
+            var mat = CreateMatrix.Diagonal<double>(3, 3, 1);
             _testOutputHelper.WriteLine(mat.ToString());
         }
     }
