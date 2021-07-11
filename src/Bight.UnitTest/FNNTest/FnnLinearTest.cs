@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using Bight.Mathematics.Loss;
 using Bight.Neural.Layers;
 using MathNet.Numerics.LinearAlgebra;
 using Xunit;
@@ -10,9 +12,11 @@ namespace Bight.UnitTest.FNNTest
     {
         private readonly ITestOutputHelper _testOutputHelper;
         private readonly int Iterations = 100;
+        private readonly double LearningRate = 1E-3;
         private readonly double[] price = {3000, 5000, 7002, 9010, 10990};
         private readonly double[] years = {2000, 2001, 2002, 2003, 2004};
-        private double LearningRate = 1E-3;
+
+        public Func<double[], double[], double> lossFunc = Loss.GetL2MeanLoss;
 
         public FnnLinearTest(ITestOutputHelper testOutputHelper)
         {

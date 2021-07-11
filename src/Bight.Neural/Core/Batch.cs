@@ -9,8 +9,11 @@ namespace Bight.Neural.Core
         private int _channel;
         private Shape _shape;
 
-        public Batch(Shape shape, int batch = 1, int channel = 1)
+        public Batch(Shape shape, int batchSize = 1, int channel = 1)
         {
+            Shape = shape;
+            BatchSize = batchSize;
+            Channel = channel;
         }
 
         public int BatchSize
@@ -48,7 +51,13 @@ namespace Bight.Neural.Core
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(_batchSize, _channel, _shape);
+            unchecked
+            {
+                var hashCode = _batchSize;
+                hashCode = (hashCode * 397) ^ _channel;
+                hashCode = (hashCode * 397) ^ (_shape != null ? _shape.GetHashCode() : 0);
+                return hashCode;
+            }
         }
     }
 }
