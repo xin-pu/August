@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="NeuralTest\NeuronTest.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="FluentAssertions" Version="5.10.3" />
     <PackageReference Include="Microsoft.DotNet.PlatformAbstractions" Version="1.1.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />
@@ -28,10 +24,6 @@
     <ProjectReference Include="..\Bight.Math\Bight.Mathematics.csproj" />
     <ProjectReference Include="..\Bight.Neural\Bight.Neural.csproj" />
     <ProjectReference Include="..\Numerics\Numerics.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="NeuralTest\" />
   </ItemGroup>
 
 </Project>

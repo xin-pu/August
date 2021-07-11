@@ -1,6 +1,6 @@
 ﻿using MvvmCross.ViewModels;
 
-namespace Bight.Neural.Model
+namespace Bight.Neural.Network
 {
     public abstract class NeuralNetwork : MvxViewModel
     {

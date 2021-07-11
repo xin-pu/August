@@ -1,4 +1,4 @@
-﻿namespace Bight.Neural.Model
+﻿namespace Bight.Neural.Network
 {
     public abstract class FeedforwardNN : NeuralNetwork
     {

@@ -4,6 +4,6 @@
 	<s:String x:Key="/Default/Environment/Hierarchy/Build/SolBuilderDuo/UseMsbuildSolutionBuilder/@EntryValue">NewVersion</s:String>
 	<s:String x:Key="/Default/Environment/Highlighting/HighlightingSourceSnapshotLocation/@EntryValue">C:\Users\Xin.Pu\AppData\Local\Temp\JetBrains\ReSharperPlatformVs16\vAny_79dac978\CoverageData\_Bight.-515838568\Snapshot\snapshot.utdcvr</s:String>
 	
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=38b39e04_002D18bd_002D4e04_002Db1a3_002D2388e877e69d/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="All tests from &amp;lt;Bight.UnitTest&amp;gt;" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=38b39e04_002D18bd_002D4e04_002Db1a3_002D2388e877e69d/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="1" IsActive="True" Name="All tests from &amp;lt;Bight.UnitTest&amp;gt;" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;Project Location="E:\Document Code\Code Aries\Bight\src\Bight.UnitTest" Presentation="&amp;lt;Bight.UnitTest&amp;gt;" /&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

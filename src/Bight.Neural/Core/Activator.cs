@@ -86,13 +86,18 @@ namespace Bight.Neural.Core
             set => SetProperty(ref β, value);
         }
 
-        [YamlIgnore] public Func<double, double> ActivateFunc { set; get; }
+        [YamlIgnore] public Func<double, double> ActivateFunc { get; }
 
-        [YamlIgnore] public Func<double, double> FirstDerivativeFunc { set; get; }
+        [YamlIgnore] public Func<double, double> FirstDerivativeFunc { get; }
 
         public double Activate(double u)
         {
             return ActivateFunc(u);
+        }
+
+        public override string ToString()
+        {
+            return $"Activator:{ActivatorType}\tΛ:{Λ}\tΒ{Β}";
         }
     }
 }

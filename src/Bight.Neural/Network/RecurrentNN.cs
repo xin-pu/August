@@ -1,12 +1,6 @@
-﻿
-
-namespace Bight.Neural.Model
+﻿namespace Bight.Neural.Network
 {
     public class RecurrentNN : NeuralNetwork
     {
-
-
-
-       
     }
 }

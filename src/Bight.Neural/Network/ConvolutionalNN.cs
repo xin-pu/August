@@ -1,4 +1,4 @@
-﻿namespace Bight.Neural.Model
+﻿namespace Bight.Neural.Network
 {
     public class ConvolutionalNeuralNet : NeuralNetwork
     {

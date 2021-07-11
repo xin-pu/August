@@ -26,5 +26,11 @@ namespace Bight.Neural.Core
             get => _netActivate;
             private set => SetProperty(ref _netActivate, value);
         }
+
+        public override string ToString()
+        {
+            return $"Net Input:\t{NetInput}\r" +
+                   $"Activate:\t{NetActivate}";
+        }
     }
 }
