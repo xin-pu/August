@@ -6,12 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Neurons\**" />
-    <EmbeddedResource Remove="Neurons\**" />
-    <None Remove="Neurons\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Remove="Layers\Layer\Dropput.cs" />
     <Compile Remove="Layers\Layer\Masking.cs" />
     <Compile Remove="Layers\Layer\MaxPool.cs" />

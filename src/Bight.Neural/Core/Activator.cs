@@ -8,43 +8,16 @@ namespace Bight.Neural.Core
 {
     public class Activator : MvxViewModel
     {
-
         private ActivationType activatorType;
         private double β = 0.1;
         private double λ = 0.1;
 
-
-        public ActivationType ActivatorType
-        {
-            get => activatorType;
-            set => SetProperty(ref activatorType, value);
-        }
-
-        public double Λ
-        {
-            get => λ;
-            set => SetProperty(ref λ, value);
-        }
-
-        public double Β
-        {
-            get => β;
-            set => SetProperty(ref β, value);
-        }
-
-        [YamlIgnore]
-        public Func<double, double> ActivateFunc { set; get; }
-
-        [YamlIgnore]
-        public Func<double, double> FirstDerivativeFunc { set; get; }
-
         /// <summary>
-        /// Generate Activation
+        ///     Generate Activation
         /// </summary>
         public Activator() :
             this(ActivationType.ReLU)
         {
-
         }
 
         public Activator(
@@ -70,19 +43,19 @@ namespace Bight.Neural.Core
                     ActivateFunc = Activation.ReLU;
                     break;
                 case ActivationType.LeakyReLu:
-                    ActivateFunc = (u) => Activation.LeakyReLu(u, γ);
+                    ActivateFunc = u => Activation.LeakyReLu(u, γ);
                     break;
                 case ActivationType.PReLu:
-                    ActivateFunc = (u) => Activation.PReLu(u, γ);
+                    ActivateFunc = u => Activation.PReLu(u, γ);
                     break;
                 case ActivationType.ELU:
-                    ActivateFunc = (u) => Activation.ELU(u, γ);
+                    ActivateFunc = u => Activation.ELU(u, γ);
                     break;
                 case ActivationType.Softplus:
                     ActivateFunc = Activation.Softplus;
                     break;
                 case ActivationType.Swish:
-                    ActivateFunc = (u) => Activation.Swish(u, β);
+                    ActivateFunc = u => Activation.Swish(u, β);
                     break;
                 case ActivationType.GELU:
                     ActivateFunc = Activation.GELU;
@@ -94,10 +67,32 @@ namespace Bight.Neural.Core
             FirstDerivativeFunc = Differentiate.FirstDerivativeFunc(ActivateFunc);
         }
 
+
+        public ActivationType ActivatorType
+        {
+            get => activatorType;
+            set => SetProperty(ref activatorType, value);
+        }
+
+        public double Λ
+        {
+            get => λ;
+            set => SetProperty(ref λ, value);
+        }
+
+        public double Β
+        {
+            get => β;
+            set => SetProperty(ref β, value);
+        }
+
+        [YamlIgnore] public Func<double, double> ActivateFunc { set; get; }
+
+        [YamlIgnore] public Func<double, double> FirstDerivativeFunc { set; get; }
+
         public double Activate(double u)
         {
             return ActivateFunc(u);
         }
-
     }
 }

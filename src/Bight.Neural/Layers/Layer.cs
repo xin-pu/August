@@ -8,14 +8,16 @@ using YAXLib;
 
 namespace Bight.Neural.Layers
 {
-
-
     public abstract class Layer : MvxViewModel
     {
-
-        private bool _trainable;
         private Shape _inputShape;
         private Shape _outputShape;
+
+        private bool _trainable;
+
+        internal Layer()
+        {
+        }
 
         public uint ID { set; get; }
 
@@ -37,12 +39,9 @@ namespace Bight.Neural.Layers
             set => SetProperty(ref _outputShape, value);
         }
 
-        internal Layer()
-        {
+        public abstract Matrix<double> Call(Matrix<double> inPut);
 
-        }
-
-        public abstract Matrix<double> Call(Matrix<double> intPut);
+        public abstract Matrix<double> CallBack(Matrix<double> inPut);
 
         public abstract Dictionary<string, object> GetConfigs();
 
@@ -56,7 +55,6 @@ namespace Bight.Neural.Layers
 
         public override string ToString()
         {
-
             var serializer = new SerializerBuilder()
                 .WithNamingConvention(CamelCaseNamingConvention.Instance)
                 .Build();

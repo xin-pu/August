@@ -7,21 +7,47 @@ namespace Bight.Neural.Core
     public class Shape : MvxViewModel, IEquatable<Shape>
     {
         private int _height;
-        private int _width;
         private int _thickness;
+        private int _width;
 
+
+        /// <summary>
+        ///     for Serializer
+        /// </summary>
+        public Shape()
+        {
+        }
+
+
+        public Shape(int Height)
+            : this(Height, 1, 1)
+        {
+        }
+
+        public Shape(int height, int width)
+            : this(height, width, 1)
+        {
+        }
+
+
+        public Shape(int height, int width, int thickness)
+        {
+            Height = height;
+            Width = width;
+            Thickness = thickness;
+        }
 
 
         public int Height
         {
             get => _height;
-            set => SetProperty(ref _height, value);
+            private set => SetProperty(ref _height, value);
         }
 
         public int Width
         {
             get => _width;
-            set => SetProperty(ref _width, value);
+            private set => SetProperty(ref _width, value);
         }
 
         public int Thickness
@@ -37,12 +63,12 @@ namespace Bight.Neural.Core
             get
             {
                 return i switch
-                    {
+                {
                     0 => Height,
                     1 => Width,
                     2 => Thickness,
-                    _ => throw new ArgumentOutOfRangeException(nameof(i)),
-                    };
+                    _ => throw new ArgumentOutOfRangeException(nameof(i))
+                };
             }
             set
             {
@@ -63,80 +89,17 @@ namespace Bight.Neural.Core
             }
         }
 
-        #region Init
-        /// <summary>
-        /// for Serializer
-        /// </summary>
-        public Shape()
-        {
-
-        }
-
-
-        public Shape(int Height)
-            : this(Height, 1, 1)
-        {
-
-        }
-
-        public Shape(int height, int width)
-            : this(height, width, 1)
-        {
-
-        }
-
-
-        public Shape(int height, int width, int thickness)
-        {
-            Height = height;
-            Width = width;
-            Thickness = thickness;
-        }
-
-        public static Shape From<T>(Matrix<T> denseMatrix) 
-            where T : struct, IEquatable<T>, IFormattable
-        {
-            return new Shape(denseMatrix.RowCount, denseMatrix.ColumnCount);
-        }
-
-
-        #endregion
-
-
-
-        #region
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="s1"></param>
-        /// <param name="s2"></param>
-        /// <returns></returns>
-        public static bool operator ==(Shape s1, Shape s2)
-        {
-            return s1 != null && s1.Equals(s2);
-        }
-
-        public static bool operator !=(Shape s1, Shape s2)
-        {
-            return s1 != null && !s1.Equals(s2);
-        }
-
-        #endregion
-
-
-
-
-        public override string ToString()
-        {
-            return $"Shape:{Height}*{Width}*{Thickness}";
-        }
-
         public bool Equals(Shape other)
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
             return _height == other._height && _width == other._width && _thickness == other._thickness;
+        }
+
+
+        public override string ToString()
+        {
+            return $"Shape:{Height}*{Width}*{Thickness}";
         }
 
         public override bool Equals(object obj)
@@ -157,5 +120,31 @@ namespace Bight.Neural.Core
                 return hashCode;
             }
         }
+
+        public static Shape From<T>(Matrix<T> denseMatrix)
+            where T : struct, IEquatable<T>, IFormattable
+        {
+            return new Shape(denseMatrix.RowCount, denseMatrix.ColumnCount);
+        }
+
+
+        #region
+
+        /// <summary>
+        /// </summary>
+        /// <param name="s1"></param>
+        /// <param name="s2"></param>
+        /// <returns></returns>
+        public static bool operator ==(Shape s1, Shape s2)
+        {
+            return s1 != null && s1.Equals(s2);
+        }
+
+        public static bool operator !=(Shape s1, Shape s2)
+        {
+            return s1 != null && !s1.Equals(s2);
+        }
+
+        #endregion
     }
 }

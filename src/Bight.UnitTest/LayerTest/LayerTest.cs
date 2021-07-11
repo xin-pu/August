@@ -9,8 +9,8 @@ namespace Bight.UnitTest.LayerTest
     public class LayerTest
     {
         private readonly ITestOutputHelper _testOutputHelper;
-        private readonly Flatten flatten = new Flatten();
         private readonly Dense dense = new Dense(10);
+        private readonly Flatten flatten = new Flatten();
         private readonly Normal random = new Normal();
 
         public LayerTest(ITestOutputHelper testOutputHelper)
@@ -35,8 +35,5 @@ namespace Bight.UnitTest.LayerTest
             outMatrix = dense.Call(outMatrix);
             _testOutputHelper.WriteLine(outMatrix.ToString());
         }
-
     }
-
-
 }

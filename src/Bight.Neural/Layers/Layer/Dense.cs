@@ -1,29 +1,42 @@
-﻿using Bight.Mathematics.Activator;
+﻿using System;
+using System.Collections.Generic;
+using Bight.Mathematics.Activator;
 using Bight.Neural.Core;
 using MathNet.Numerics.Distributions;
 using MathNet.Numerics.LinearAlgebra;
-using System;
-using System.Collections.Generic;
 using Activator = Bight.Neural.Core.Activator;
 
 namespace Bight.Neural.Layers
 {
     /// <summary>
-    /// ust your regular densely-connected NN layer.
-    /// 
-    /// `Dense` implements the operation:
-    /// `output = activation(dot(input, kernel) + bias)`
-    /// where `activation` is the element-wise activation function passed as the `activation` argument,
-    /// Kenerl is a weights matrix created by the layer,
-    /// Bias is a bias vector created by the layer
-    /// (only applicable if `use_bias` is `True`).
+    ///     ust your regular densely-connected NN layer.
+    ///     `Dense` implements the operation:
+    ///     `output = activation(dot(input, kernel) + bias)`
+    ///     where `activation` is the element-wise activation function passed as the `activation` argument,
+    ///     Kenerl is a weights matrix created by the layer,
+    ///     Bias is a bias vector created by the layer
+    ///     (only applicable if `use_bias` is `True`).
     /// </summary>
     public class Dense : Layer
     {
-        private int _uints = default;
         private Activator _activator = default;
-        private Matrix<double> _kenerl = default;
         private Matrix<double> _bias = default;
+        private Matrix<double> _kenerl = default;
+        private int _uints = default;
+
+
+        /// <summary>
+        ///     works for clone
+        /// </summary>
+        public Dense()
+        {
+        }
+
+        public Dense(int uints, ActivationType activationType = ActivationType.ReLU)
+        {
+            Uints = uints;
+            Activator = new Activator(activationType);
+        }
 
 
         public int Uints
@@ -39,8 +52,8 @@ namespace Bight.Neural.Layers
         }
 
         /// <summary>
-        /// Height should be Unit
-        /// Width should be 
+        ///     Height should be Unit
+        ///     Width should be
         /// </summary>
         public Matrix<double> Kenerl
         {
@@ -54,30 +67,9 @@ namespace Bight.Neural.Layers
             set => SetProperty(ref _bias, value);
         }
 
-
-        /// <summary>
-        /// works for clone
-        /// </summary>
-        public Dense()
+        public override Matrix<double> Call(Matrix<double> inPut)
         {
-
-        }
-
-        public Dense(int uints)
-            : this(uints, ActivationType.ReLU)
-        {
-
-        }
-
-        public Dense(int uints, ActivationType activationType)
-        {
-            Uints = uints;
-            Activator = new Activator(activationType);
-        }
-
-        public override Matrix<double> Call(Matrix<double> intPut)
-        {
-            InputShape = Shape.From(intPut);
+            InputShape = Shape.From(inPut);
             if (InputShape.Width != 1)
                 throw new Exception();
 
@@ -87,11 +79,17 @@ namespace Bight.Neural.Layers
                 Bias = CreateMatrix.Random<double>(Uints, 1, new Normal());
             }
 
-            var mul = intPut.Transpose().Multiply(Kenerl);                 /// dot(input, kernel)
-            var outRes = mul.Transpose().Add(Bias);                             /// +bias
-            return CreateMatrix.Dense(outRes.RowCount, outRes.ColumnCount,      /// activate
+            var mul = inPut.Transpose().Multiply(Kenerl); /// dot(input, kernel)
+            var outRes = mul.Transpose().Add(Bias); /// +bias
+            return CreateMatrix.Dense(outRes.RowCount, outRes.ColumnCount, /// activate
                 (i, j) => Activator.ActivateFunc(outRes[i, j])).Transpose();
         }
+
+        public override Matrix<double> CallBack(Matrix<double> inPut)
+        {
+            throw new NotImplementedException();
+        }
+
 
         public override Dictionary<string, object> GetConfigs()
         {
