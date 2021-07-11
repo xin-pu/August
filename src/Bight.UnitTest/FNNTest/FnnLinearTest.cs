@@ -28,12 +28,14 @@ namespace Bight.UnitTest.FNNTest
 
             var flatten = new Flatten();
             var dense = new Dense(10);
+            var dense2 = new Dense(1);
 
             foreach (var i in Enumerable.Range(1, Iterations))
             {
                 var x_temp = flatten.Call(x);
                 x_temp = dense.Call(x_temp);
-                _testOutputHelper.WriteLine($"Ite:{i:D}\r{x_temp}");
+                var y_pre = dense2.Call(x_temp);
+                _testOutputHelper.WriteLine($"Ite:{i:D}\r{y_pre}");
             }
         }
 

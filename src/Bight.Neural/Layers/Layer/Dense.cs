@@ -82,7 +82,7 @@ namespace Bight.Neural.Layers
             var mul = inPut.Transpose().Multiply(Kenerl); /// dot(input, kernel)
             var outRes = mul.Transpose().Add(Bias); /// +bias
             return CreateMatrix.Dense(outRes.RowCount, outRes.ColumnCount, /// activate
-                (i, j) => Activator.ActivateFunc(outRes[i, j])).Transpose();
+                (i, j) => Activator.ActivateFunc(outRes[i, j]));
         }
 
         public override Matrix<double> CallBack(Matrix<double> inPut)
