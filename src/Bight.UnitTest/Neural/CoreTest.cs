@@ -1,5 +1,4 @@
-﻿using Bight.Mathematics.Activator;
-using Bight.Neural.Core;
+﻿using Bight.Neural.Activator;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -9,7 +8,7 @@ namespace Bight.UnitTest.Neural
     {
         private readonly ITestOutputHelper _testOutputHelper;
 
-        public Activator activator = new Activator(ActivationType.Logistic);
+        public Activation activator = new Activation(ActivationType.Logistic);
 
         public CoreTest(ITestOutputHelper testOutputHelper)
         {
@@ -21,7 +20,7 @@ namespace Bight.UnitTest.Neural
         [InlineData(ActivationType.ReLU)]
         public void CreateActivator(ActivationType activationType)
         {
-            activator = new Activator(activationType, 0.2);
+            activator = new Activation(activationType, 0.2);
             _testOutputHelper.WriteLine(activator.ToString());
         }
 

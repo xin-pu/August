@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Bight.Mathematics.Activator;
+using Bight.Neural.Activator;
 using Bight.Neural.Core;
 using MathNet.Numerics.Distributions;
 using MathNet.Numerics.LinearAlgebra;
-using Activator = Bight.Neural.Core.Activator;
 
 namespace Bight.Neural.Layers
 {
@@ -19,7 +18,7 @@ namespace Bight.Neural.Layers
     /// </summary>
     public class Dense : Layer
     {
-        private Activator _activator = default;
+        private Activation _activator = default;
         private Matrix<double> _bias = default;
         private Matrix<double> _kenerl = default;
         private int _uints = default;
@@ -35,7 +34,7 @@ namespace Bight.Neural.Layers
         public Dense(int uints, ActivationType activationType = ActivationType.ReLU)
         {
             Uints = uints;
-            Activator = new Activator(activationType);
+            Activator = new Activation(activationType);
         }
 
 
@@ -45,7 +44,7 @@ namespace Bight.Neural.Layers
             set => SetProperty(ref _uints, value);
         }
 
-        public Activator Activator
+        public Activation Activator
         {
             get => _activator;
             set => SetProperty(ref _activator, value);

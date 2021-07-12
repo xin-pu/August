@@ -21,7 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Bight.Math\Bight.Mathematics.csproj" />
     <ProjectReference Include="..\Numerics\Numerics.csproj" />
   </ItemGroup>
 

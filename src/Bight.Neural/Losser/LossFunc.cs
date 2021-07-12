@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Linq;
 
-namespace Bight.Mathematics.Loss
+namespace Bight.Losser.Loss
 {
     // Todo Add More Loss Basic function
 
     /// <summary>
     ///     Loss function, Cost function
     /// </summary>
-    public static class Loss
+    public static class LossFunc
     {
         public static Func<double[], double[], double> GetL1Loss =>
             (y_actual, y_estimatee) =>

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
 
-namespace Bight.Mathematics.Activator
+namespace Bight.Neural.Activator
 {
-    public static class Activation
+    public static class ActivationFunc
     {
         #region Switch function
 
@@ -27,7 +27,7 @@ namespace Bight.Mathematics.Activator
         /// <summary>
         /// </summary>
 
-        #region sigmod function
+        #region Sigmod function
 
         public static Func<double, double> Logistic =>
             u => 1 / (1 + Math.Pow(Math.E, -u));

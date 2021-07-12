@@ -1,4 +1,4 @@
-﻿namespace Bight.Mathematics.Activator
+﻿namespace Bight.Neural.Activator
 {
     public enum ActivationType
     {

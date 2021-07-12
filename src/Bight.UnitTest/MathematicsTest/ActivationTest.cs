@@ -1,4 +1,4 @@
-using Bight.Mathematics.Activator;
+using Bight.Neural.Activator;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -16,10 +16,10 @@ namespace Bight.UnitTest.MathematicsTest
         [Fact]
         public void TestSigmod()
         {
-            var res0 = Activation.Logistic(0);
-            var res1 = Activation.Tanh(0);
-            var res2 = Activation.HardLogistic(0);
-            var res3 = Activation.HardTanh(0);
+            var res0 = ActivationFunc.Logistic(0);
+            var res1 = ActivationFunc.Tanh(0);
+            var res2 = ActivationFunc.HardLogistic(0);
+            var res3 = ActivationFunc.HardTanh(0);
             _testOutputHelper.WriteLine(res0.ToString());
             _testOutputHelper.WriteLine(res1.ToString());
             _testOutputHelper.WriteLine(res2.ToString());
@@ -29,9 +29,9 @@ namespace Bight.UnitTest.MathematicsTest
         [Fact]
         public void TestRelu()
         {
-            var res1 = Activation.ReLU(0);
-            var res2 = Activation.LeakyReLu(0, 1);
-            var res3 = Activation.PReLu(0, 1);
+            var res1 = ActivationFunc.ReLU(0);
+            var res2 = ActivationFunc.LeakyReLu(0, 1);
+            var res3 = ActivationFunc.PReLu(0, 1);
 
             _testOutputHelper.WriteLine(res1.ToString());
             _testOutputHelper.WriteLine(res2.ToString());
@@ -41,8 +41,8 @@ namespace Bight.UnitTest.MathematicsTest
         [Fact]
         public void TestELU()
         {
-            var res1 = Activation.GELU(0);
-            var res2 = Activation.ELU(0, 0);
+            var res1 = ActivationFunc.GELU(0);
+            var res2 = ActivationFunc.ELU(0, 0);
             _testOutputHelper.WriteLine(res1.ToString());
             _testOutputHelper.WriteLine(res2.ToString());
         }
@@ -51,8 +51,8 @@ namespace Bight.UnitTest.MathematicsTest
         [Fact]
         public void TestActivatorMore()
         {
-            var res1 = Activation.Swish(0, 0);
-            var res2 = Activation.Softplus(0);
+            var res1 = ActivationFunc.Swish(0, 0);
+            var res2 = ActivationFunc.Softplus(0);
             _testOutputHelper.WriteLine(res1.ToString());
             _testOutputHelper.WriteLine(res2.ToString());
         }

@@ -1,12 +1,11 @@
 ﻿using System;
-using Bight.Mathematics.Activator;
 using MathNet.Numerics;
 using MvvmCross.ViewModels;
 using YamlDotNet.Serialization;
 
-namespace Bight.Neural.Core
+namespace Bight.Neural.Activator
 {
-    public class Activator : MvxViewModel
+    public class Activation : MvxViewModel
     {
         private ActivationType activatorType;
         private double β = 0.1;
@@ -15,12 +14,12 @@ namespace Bight.Neural.Core
         /// <summary>
         ///     Generate Activation
         /// </summary>
-        public Activator() :
+        public Activation() :
             this(ActivationType.ReLU)
         {
         }
 
-        public Activator(
+        public Activation(
             ActivationType activator,
             double γ = 0.1,
             double β = 0.1)
@@ -28,37 +27,37 @@ namespace Bight.Neural.Core
             switch (activator)
             {
                 case ActivationType.Logistic:
-                    ActivateFunc = Activation.Logistic;
+                    ActivateFunc = ActivationFunc.Logistic;
                     break;
                 case ActivationType.Tanh:
-                    ActivateFunc = Activation.Tanh;
+                    ActivateFunc = ActivationFunc.Tanh;
                     break;
                 case ActivationType.HardLogistic:
-                    ActivateFunc = Activation.HardLogistic;
+                    ActivateFunc = ActivationFunc.HardLogistic;
                     break;
                 case ActivationType.HardTanh:
-                    ActivateFunc = Activation.HardTanh;
+                    ActivateFunc = ActivationFunc.HardTanh;
                     break;
                 case ActivationType.ReLU:
-                    ActivateFunc = Activation.ReLU;
+                    ActivateFunc = ActivationFunc.ReLU;
                     break;
                 case ActivationType.LeakyReLu:
-                    ActivateFunc = u => Activation.LeakyReLu(u, γ);
+                    ActivateFunc = u => ActivationFunc.LeakyReLu(u, γ);
                     break;
                 case ActivationType.PReLu:
-                    ActivateFunc = u => Activation.PReLu(u, γ);
+                    ActivateFunc = u => ActivationFunc.PReLu(u, γ);
                     break;
                 case ActivationType.ELU:
-                    ActivateFunc = u => Activation.ELU(u, γ);
+                    ActivateFunc = u => ActivationFunc.ELU(u, γ);
                     break;
                 case ActivationType.Softplus:
-                    ActivateFunc = Activation.Softplus;
+                    ActivateFunc = ActivationFunc.Softplus;
                     break;
                 case ActivationType.Swish:
-                    ActivateFunc = u => Activation.Swish(u, β);
+                    ActivateFunc = u => ActivationFunc.Swish(u, β);
                     break;
                 case ActivationType.GELU:
-                    ActivateFunc = Activation.GELU;
+                    ActivateFunc = ActivationFunc.GELU;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(activator), activator, null);
